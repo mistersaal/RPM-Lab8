@@ -1,0 +1,48 @@
+@startuml
+
+class Flat {
+    +Flat(rooms: int, area: float, floor: int, district: string&)
+    +isEqual(another: Flat*): bool
+    +getRooms(): int
+    +getArea(): float
+    +getFloor(): int
+    +getDistrict(): string&
+    -rooms: int
+    -area: float
+    -floor: int
+    -district: string
+}
+
+class FlatApplication {
+    +FlatApplication(requirement: Flat*, offer: Flat*)
+    +~FlatApplication()
+    +isEqual(another: FlatApplication*): bool
+    +getRequirement(): Flat*
+    +getOffer(): Flat*
+    -requirement: Flat*
+    -offer: Flat*
+}
+
+class FileCabinet {
+    +newRequest(application: FlatApplication*): Flat*
+    +show(): void
+    -applications: list<FlatApplication*>
+}
+
+class Menu {
+    +Menu()
+    +show(): void
+    -fileCabinet: FileCabinet*
+    -mainMenuAction(): void
+    -showAction(): void
+    -createFlat(): Flat*
+    -createApplication(): FlatApplication*
+    -newRequest(): void
+}
+
+FlatApplication o-- Flat
+FileCabinet o-- FlatApplication
+Menu o-- FileCabinet
+
+
+@enduml
